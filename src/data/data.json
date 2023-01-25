@@ -1,0 +1,164 @@
+{
+    "Sheet1": [
+      {
+        "Name": "스푼",
+        "Type": "분식",
+        "Price": "싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "호랭이곳간",
+        "Type": "한식",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "신복관 센트럴파크점",
+        "Type": "한식",
+        "Price": "비싸",
+        "Distance": "멀어",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "청기와감자탕",
+        "Type": "한식",
+        "Price": "비싸",
+        "Distance": "중간",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "깨비옥",
+        "Type": "한식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "99왕돈까스",
+        "Type": "한식 ? 일식 ?",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "맘스터치",
+        "Type": "양식",
+        "Price": "싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "샤오바오우육면",
+        "Type": "중식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "별로"
+      },
+      {
+        "Name": "육본가",
+        "Type": "한식",
+        "Price": "중간",
+        "Distance": "중간",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "화화쿵주마라탕",
+        "Type": "중식",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "용호동낙지",
+        "Type": "한식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "별로"
+      },
+      {
+        "Name": "깐부치킨",
+        "Type": "한식 ? 양식 ?",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "명동칼국수",
+        "Type": "한식",
+        "Price": "싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "쉐이크쉑",
+        "Type": "양식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "담솥",
+        "Type": "한식",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "화양연화 현대프리미엄아울렛 송도점",
+        "Type": "동남아식",
+        "Price": "중간",
+        "Distance": "중간",
+        "Tates": "평타"
+      },
+      {
+        "Name": "드렁킨타이",
+        "Type": "동남아식",
+        "Price": "중간",
+        "Distance": "중간",
+        "Tates": "평타"
+      },
+      {
+        "Name": "엉클인더키친 2호점",
+        "Type": "동남아식",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "북촌손만두",
+        "Type": "한식",
+        "Price": "싸",
+        "Distance": "가까워",
+        "Tates": "평타"
+      },
+      {
+        "Name": "부타이5막",
+        "Type": "일식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "미쿡식당",
+        "Type": "양식",
+        "Price": "비싸",
+        "Distance": "가까워",
+        "Tates": "별로"
+      },
+      {
+        "Name": "홍대돈부리",
+        "Type": "일식",
+        "Price": "중간",
+        "Distance": "가까워",
+        "Tates": "맛도리"
+      },
+      {
+        "Name": "아비코",
+        "Type": "일식",
+        "Price": "적당",
+        "Distance": "가까워",
+        "Tates": "평타"
+      }
+    ]
