@@ -1,14 +1,49 @@
 import './App.css';
 import React, { useState } from 'react';
+import Data from './data/data.json';
 
 function App() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
+  let temp = Data.Restaurants;
+  const [resultArr, createArr] = useState([]);
+
+  const ShowData = (check) => {
+
+    const foodType = ["한식", "양식", "중식", "일식"];
+    const foodPrice = ["싸", "중간", "비싸"];
+    const FoodDistance = ["가까워", "중간", "멀어"];
+
+    if(foodType.includes(check)){
+      temp = temp.filter(food => food.Type === check);
+      console.log(check);
+      console.log(temp);
+    }
+
+    if(foodPrice.includes(check)){
+      temp = temp.filter(food => food.Price === check);
+      console.log(temp);
+    }
+
+    if(FoodDistance.includes(check)) {
+      temp = temp.filter(food => food.Distance === check);
+      console.log(temp);
+    }
+
+    createArr(temp);
+
+    return(
+      <div>
+        <h2>{temp}</h2>
+      </div>
+    );
+  }
+
+
   return (
     <div>
-
       <nav className="bg-gray-800 p-6">
             <div className="container mx-auto flex items-center justify-between">
               <div className="flex items-center">
@@ -123,36 +158,36 @@ function App() {
       {/* 음식 종류 */}
       <div className="flex justify-center">
         <div className = "p-5">
-          <input type="checkbox" id="korean" className="peer hidden" />
-          <label htmlFor="korean" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
-            한식 
+          <input type="checkbox" id="korean" className="peer hidden"/>
+          <label onClick = {() => {ShowData("한식"); console.log("한식입력")}} htmlFor="korean" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+            한식
           </label>
         </div>
 
-        <div className = "p-5">          
-          <input type="checkbox" id="chinese" className="peer hidden" />
-          <label htmlFor="chinese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+        <div className = "p-5">        
+          <input type="checkbox" id="chinese" className="peer hidden"/>  
+          <label onClick = {() => {ShowData("중식"); console.log("중식입력")}} htmlFor="chinese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
           중식 
           </label>
         </div>
 
         <div className = "p-5">
           <input type="checkbox" id="western" className="peer hidden" />
-          <label htmlFor="western" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("일식"); console.log("양식입력")}} htmlFor="western" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             양식 
           </label>
         </div>
 
         <div className = "p-5">
           <input type="checkbox" id="japanese" className="peer hidden" />
-          <label htmlFor="japanese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("일식"); console.log("일식입력")}} htmlFor="japanese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             일식 
           </label>
         </div>
 
         <div className = "p-5">
           <input type="checkbox" id="bbun" className="peer hidden" />
-          <label htmlFor="bbun" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("분식"); console.log("분식입력")}} htmlFor="bbun" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             분식 
           </label>
         </div>
@@ -162,19 +197,19 @@ function App() {
       <div className ="flex justify-center">
         <div className = "p-5">
           <input type="checkbox" id="cheap" className="peer hidden" />
-          <label htmlFor="cheap" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("싸"); console.log("싸ㅏ")}} htmlFor="cheap" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             싸 
           </label>
         </div>
         <div className = "p-5">
           <input type="checkbox" id="middle" className="peer hidden" />
-          <label htmlFor="middle" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("중간"); console.log("중간ㄴ")}} htmlFor="middle" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             적당해
           </label>
         </div>
         <div className = "p-5">
           <input type="checkbox" id="expensive" className="peer hidden" />
-          <label htmlFor="expensive" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+          <label onClick = {() => {ShowData("비싸"); console.log("비싸ㅏ")}} htmlFor="expensive" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
             비싸 
           </label>
         </div>
