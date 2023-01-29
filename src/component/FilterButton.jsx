@@ -1,9 +1,11 @@
 import React from 'react';
+import Data from '../data/data.json';
 
 export let keyWords = [];
 export let chosenType = [];
 export let chosenPrice = [];
 export let chosenDistance = [];
+export let result = [];
 
 //false 면 안 담겨 있는거, true 면 담겨있는거
 let isKorean = false;
@@ -26,6 +28,7 @@ const addKeyWord = (word) => {
 } 
 
 export const deleteAll = () => {
+    result = [];
     keyWords = [];
     chosenType = [];
     chosenPrice = [];
@@ -203,15 +206,130 @@ const check = (e) =>{
     }
 }
 
+const testAll = () => {
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Type) && keyWords.includes(restaurant.Distance) && keyWords.includes(restaurant.Price)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testTypeAndPrice = () => {
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Type) && keyWords.includes(restaurant.Price)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testPriceAndDistance = () =>{
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Price) && keyWords.includes(restaurant.Distance)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testTypeAndDistance = () =>{
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Type) && keyWords.includes(restaurant.Distance)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testType = () => {
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Type)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testPrice = () => {
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Price)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+const testDistance = () => {
+    let arr = [];
+    for(const restaurant of Data.Restaurants){
+        if(keyWords.includes(restaurant.Distance)){
+            console.log(restaurant);
+            arr.push(restaurant);
+        }
+    }
+    return arr;
+}
+
+export const ShowData = () => {
+    const isType = chosenType.length !== 0;
+    const isPrice = chosenPrice.length !== 0;
+    const isDistance = chosenDistance.length !== 0;
+
+    if(isType && isPrice && isDistance){
+        result = testAll();
+    }
+    else if(isType && isPrice && !isDistance){
+        result = testTypeAndPrice();
+    }
+    else if(!isType && isPrice && isDistance){
+        result = testPriceAndDistance();
+    }
+    else if(isType && !isPrice && isDistance){
+        result = testTypeAndDistance();
+    }
+    else if(isType && !isPrice && !isDistance){
+        result = testType();
+    }
+    else if(!isType && isPrice && !isDistance){
+        result = testPrice();
+    }
+    else if(!isType && !isPrice && isDistance){
+        result = testDistance();
+    }
+
+    if(result.length === 0){
+        alert("맞는 음식점이 없음!");
+        deleteAll();
+    }
+
+    console.log("sdfd");
+    return result;
+}
+
+
 const FilterButton = () => {
+
     return(
         <>
             <h2 className = "font-bold text-2xl text-center p-5">필터 (복수선택 가능)</h2>
             {/* 음식 종류 */}
             <div className="flex justify-center">
                 <div className = "p-5">
-                <input type="checkbox" id="korean" className="peer hidden"/>
-                <label onClick = {() => {console.log("한식입력");check("Korean")}} htmlFor="korean" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log(e);check("Korean")}} type="checkbox" id="korean" className="peer hidden"/>
+                <label htmlFor="korean" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     한식
                 </label>
                 </div>
