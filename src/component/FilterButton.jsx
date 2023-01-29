@@ -1,31 +1,70 @@
 import React from 'react';
+import { useState } from 'react';
 import Data from '../data/data.json';
 
-export let keyWords = [];
-export let chosenType = [];
-export let chosenPrice = [];
-export let chosenDistance = [];
+let keyWords = [];
+let chosenType = [];
+let chosenPrice = [];
+let chosenDistance = [];
 export let result = [];
 
-//false 면 안 담겨 있는거, true 면 담겨있는거
-let isKorean = false;
-let isChinese = false; 
-let isWestern = false;
-let isJapanese = false;
-let isBbun = false;
+let states = {};
 
-let isCheap = false;
-let isMiddle = false;
-let isExpensive = false;
+//필터링 할 단어 담는 코드
 
-let isClose = false;
-let isDistanceMiddle = false;
-let isFar= false;
+const test = (e) => {
+    getState(e);
+    if(states[e.target.id]){
+        pushKeyword(e.target.id);
+        pushEach(e.target.id);
+        states[e.target.id] = false;
+    }
+    else{
+        popKeyword(e.target.id);
+        popEach(e.target.id);
+        states[e.target.id] = true;
+    }
+    console.log(keyWords);
+}
 
-const addKeyWord = (word) => {
-  keyWords.push(word);
-  console.log(keyWords);
-} 
+const getState = (e) => {
+    const {id, checked} = e.target;
+    states[id] = checked;
+    console.log("getStateWorks");
+    console.log(states);
+}
+
+const pushKeyword = (word) => {
+    keyWords.push(word);
+}
+
+const popKeyword = (word) => {
+    keyWords = keyWords.filter(dummy => dummy !== word);
+}
+
+const pushEach = (word) => {
+    if(["한식", "중식", "일식", "양식", "분식"].includes(word)){
+        chosenType.push(word);
+    }
+    else if(["싸", "중간", "비싸"].includes(word)){
+        chosenPrice.push(word);
+    }
+    else{
+        chosenDistance.push(word);
+    }
+}
+
+const popEach = (word) => {
+    if(["한식", "중식", "일식", "양식", "분식"].includes(word)){
+        chosenType = chosenType.filter(dummy => dummy !== word);
+    }
+    else if(["싸", "중간", "비싸"].includes(word)){
+        chosenPrice = chosenPrice.filter(dummy => dummy !== word);
+    }
+    else{
+        chosenDistance = chosenDistance.filter(dummy => dummy !== word);
+    }
+}
 
 export const deleteAll = () => {
     result = [];
@@ -33,179 +72,14 @@ export const deleteAll = () => {
     chosenType = [];
     chosenPrice = [];
     chosenDistance = [];
-    isKorean = false;
-    isChinese = false; 
-    isJapanese = false;
-    isBbun = false;
-    
-    isCheap = false;
-    isMiddle = false;
-    isExpensive = false;
-    
-    isClose = false;
-    isDistanceMiddle = false;
-    isFar= false;
+    Object.keys(states).forEach(key => {
+        states[key] = false;
+    });
+    console.log(states);
+    // 상태 다 false 로 바꾸기
 }
 
-const addType = (e) => {
-  chosenType.push(e);
-}
-
-const deleteType = (word) => {
-    chosenType = chosenType.filter(dummy => dummy !== word);
-} 
-
-const addPrice = (e) => {
-  chosenPrice.push(e);
-}
-
-const deletePrice = (word) => {
-    chosenPrice = chosenPrice.filter(dummy => dummy !== word);
-}
-
-const addDistance = (e) => {
-  chosenDistance.push(e);
-}
-
-const deleteDistance = (word) => {
-    chosenDistance = chosenDistance.filter(dummy => dummy !== word);
-}
-
-const deleteKeyWord = (word) => {
-    keyWords = keyWords.filter(dummy => dummy !== word);
-    console.log(keyWords);
-}
-
-const check = (e) =>{
-    switch (e) {
-        case "Korean":
-            console.log(isKorean);
-            if(isKorean){
-                deleteKeyWord("한식");
-                deleteType("한식");
-            }
-            else{
-                addKeyWord("한식");
-                addType("한식")
-            }
-            isKorean = !isKorean;
-            break;
-        case "Chinese":
-            console.log(isChinese);
-            if(isChinese){
-                deleteKeyWord("중식");
-                deleteType("중식")
-            }
-            else{
-                addKeyWord("중식");
-                addType("중식")
-            }
-            isChinese = !isChinese;
-            break;
-        case "Western":
-            if(isWestern){
-                deleteKeyWord("양식");
-                deleteType("양식")
-            }
-            else{
-                addKeyWord("양식");
-                addType("양식");
-            }
-            isWestern = !isWestern;
-            break;
-        case "Bbun":
-            if(isBbun){
-                deleteKeyWord("분식");
-                deleteType("분식");
-            }
-            else{
-                addKeyWord("분식");
-                addType("분식");
-            }
-            isBbun = !isBbun;
-            break;
-        case "Japanese":
-            if(isJapanese){
-                deleteKeyWord("일식");
-                deleteType("일식");
-            }
-            else{
-                addType("일식");
-                addKeyWord("일식");
-            }
-            isJapanese = !isJapanese;
-            break;
-        case "Cheap":
-            if(isCheap){
-                deleteKeyWord("싸");
-                deletePrice("싸");
-            }
-            else{
-                addKeyWord("싸");
-                addPrice("싸");
-            }
-            isCheap = !isCheap;
-            break;
-        case "Middle":
-            if(isMiddle){
-                deleteKeyWord("중간");
-                deletePrice("중간");
-            }
-            else{
-                addKeyWord("중간");
-                addPrice("중간");
-            }
-            isMiddle = !isMiddle;
-            break;
-        case "Expensive":
-            if(isExpensive){
-                deleteKeyWord("비싸");
-                deletePrice("비싸");
-            }
-            else{
-                addKeyWord("비싸");
-                addPrice("비싸");
-            }
-            isExpensive = !isExpensive;
-            break;
-        case "Close":
-            if(isClose){
-                deleteKeyWord("가까워");
-                deleteDistance("가까워");
-            }
-            else{
-                addKeyWord("가까워");
-                addDistance("가까워");
-            }
-            isClose = !isClose;
-            break;
-        case "DistanceMiddle":
-            if(isDistanceMiddle){
-                deleteKeyWord("거리중간");
-                deleteDistance("거리중간");
-            }
-            else{
-                addKeyWord("거리중간");
-                addDistance("거리중간");
-            }
-            isDistanceMiddle = !isDistanceMiddle;
-            break;
-        case "Far":
-            if(isChinese){
-                deleteKeyWord("멀어");
-                deleteDistance("멀어");
-            }
-            else{
-                addKeyWord("멀어");
-                addDistance("멀어");
-            }
-            isFar = !isFar;
-            break;
-        default:
-            break;
-    }
-}
-
+//여기서 부터 필터링 
 const testAll = () => {
     let arr = [];
     for(const restaurant of Data.Restaurants){
@@ -314,50 +188,47 @@ export const ShowData = () => {
         alert("맞는 음식점이 없음!");
         deleteAll();
     }
-
-    console.log("sdfd");
     return result;
 }
 
-
 const FilterButton = () => {
-
+    
     return(
         <>
             <h2 className = "font-bold text-2xl text-center p-5">필터 (복수선택 가능)</h2>
             {/* 음식 종류 */}
             <div className="flex justify-center">
                 <div className = "p-5">
-                <input onClick = {(e) => {console.log(e);check("Korean")}} type="checkbox" id="korean" className="peer hidden"/>
-                <label htmlFor="korean" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log(e);test(e)}} type="checkbox" id="한식" className="peer hidden"/>
+                <label htmlFor="한식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     한식
                 </label>
                 </div>
 
                 <div className = "p-5">        
-                <input type="checkbox" id="chinese" className="peer hidden"/>  
-                <label onClick = {() => {console.log("중식입력");check("Chinese")}} htmlFor="chinese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
-                중식 
+                <input onClick = {(e) => {console.log("중식입력");test(e)}} type="checkbox" id="중식" className="peer hidden"/>  
+                <label htmlFor="중식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                중식
                 </label>
                 </div>
 
                 <div className = "p-5">
-                <input type="checkbox" id="western" className="peer hidden" />
-                <label onClick = {() => {console.log("양식입력");check("Western")}} htmlFor="western" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input  onClick = {(e) => {console.log("양식입력");test(e)}} type="checkbox" id="양식" className="peer hidden" />
+                <label  htmlFor="양식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     양식 
                 </label>
                 </div>
 
                 <div className = "p-5">
-                <input type="checkbox" id="japanese" className="peer hidden" />
-                <label onClick = {() => {console.log("일식입력");check("Japanese")}} htmlFor="japanese" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input  onClick = {(e) => {console.log("일식입력");test(e)}} type="checkbox" id="일식" className="peer hidden" />
+                <label htmlFor="일식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     일식 
                 </label>
                 </div>
 
-                <div className = "p-5">
-                <input type="checkbox" id="bbun" className="peer hidden" />
-                <label onClick = {() => {console.log("분식입력");check("Bbun")}} htmlFor="bbun" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <div className = "p-5"> 
+                <input onClick = {(e) => {console.log("분식입력");test(e)}} type="checkbox" id="분식" className="peer hidden" />
+                <label htmlFor="분식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     분식 
                 </label>
                 </div>
@@ -366,20 +237,20 @@ const FilterButton = () => {
             {/* 음식 가격 */}
             <div className ="flex justify-center">
                 <div className = "p-5">
-                <input type="checkbox" id="cheap" className="peer hidden" />
-                <label onClick = {() => {console.log("싸ㅏ");check("Cheap")}} htmlFor="cheap" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("싸ㅏ");test(e)}} type="checkbox" id="싸" className="peer hidden" />
+                <label htmlFor="싸" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     싸 
                 </label>
                 </div>
                 <div className = "p-5">
-                <input type="checkbox" id="middle" className="peer hidden" />
-                <label onClick = {() => {console.log("중간ㄴ"); check("Middle")}} htmlFor="middle" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("중간ㄴ");test(e)}} type="checkbox" id="중간" className="peer hidden" />
+                <label htmlFor="중간" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     적당해
                 </label>
                 </div>
                 <div className = "p-5">
-                <input type="checkbox" id="expensive" className="peer hidden" />
-                <label onClick = {() => {console.log("비싸ㅏ");check("Expensive")}} htmlFor="expensive" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("비싸ㅏ");test(e)}} type="checkbox" id="비싸" className="peer hidden" />
+                <label htmlFor="비싸" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     비싸 
                 </label>
                 </div>
@@ -388,20 +259,20 @@ const FilterButton = () => {
             {/* 거리 */}
             <div className ="flex justify-center">
                 <div className = "p-5">
-                <input type="checkbox" id="close" className="peer hidden" />
-                <label onClick = {() => {console.log("가까워ㅓ"); check("Close")}} htmlFor="close" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("가까워ㅓ"); test(e)}} type="checkbox" id="가까워" className="peer hidden" />
+                <label htmlFor="가까워" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     가까워
                 </label>
                 </div>
                 <div className = "p-5">
-                <input type="checkbox" id="d-middle" className="peer hidden" />
-                <label onClick = {() => {console.log("거리중간ㄴ");check("DistanceMiddle")}} htmlFor="d-middle" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("거리중간ㄴ");test(e)}} type="checkbox" id="거리중간" className="peer hidden" />
+                <label htmlFor="거리중간" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     적당쓰
                 </label>
                 </div>
                 <div className = "p-5">
-                <input type="checkbox" id="far" className="peer hidden" />
-                <label onClick = {() => {console.log("멀어ㅓ");check("Far")}} htmlFor="far" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
+                <input onClick = {(e) => {console.log("멀어ㅓ"); test(e)}} type="checkbox" id="멀어" className="peer hidden" />
+                <label htmlFor="멀어" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
                     멀어
                 </label>
                 </div>
