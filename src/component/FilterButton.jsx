@@ -187,6 +187,7 @@ export const ShowData = () => {
     if(result.length === 0){
         alert("맞는 음식점이 없음!");
         deleteAll();
+        location.reload();
     }
     return result;
 }
