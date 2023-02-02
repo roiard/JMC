@@ -102,7 +102,17 @@ function Result() {
                     ))}
                   </ul>
 
-                  <div className="bg-gray-50 px-4 py-3 flex flex-col gap-4 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <div className="bg-gray-50 px-4 py-3 flex flex-col gap-4 sm:px-6 sm:flex">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDetails(true);
+                      }}
+                      type="button"
+                      className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      상세 페이지 열기
+                    </button>
                     <button
                       onClick={() => {
                         setIsOpen(false);
@@ -113,16 +123,6 @@ function Result() {
                       className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
                     >
                       닫기
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowDetails(true);
-                      }}
-                      type="button"
-                      className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                    >
-                      상세 페이지 열기
                     </button>
                   </div>
                 </div>

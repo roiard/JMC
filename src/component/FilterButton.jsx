@@ -198,7 +198,7 @@ const FilterButton = () => {
         <>
             <h2 className = "font-bold text-2xl text-center p-5">필터 (복수선택 가능)</h2>
             {/* 음식 종류 */}
-            <div className="flex justify-center">
+            <div className="p-2 flex flex-wrap justify-center border-b border-gray-400">
                 <div className = "p-5">
                 <input onClick = {(e) => {console.log(e);test(e)}} type="checkbox" id="한식" className="peer hidden"/>
                 <label htmlFor="한식" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
@@ -236,7 +236,7 @@ const FilterButton = () => {
             </div>
 
             {/* 음식 가격 */}
-            <div className ="flex justify-center">
+            <div className ="p-2 flex flex-wrap justify-center border-b border-gray-400">
                 <div className = "p-5">
                 <input onClick = {(e) => {console.log("싸ㅏ");test(e)}} type="checkbox" id="싸" className="peer hidden" />
                 <label htmlFor="싸" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
@@ -258,7 +258,7 @@ const FilterButton = () => {
             </div>
 
             {/* 거리 */}
-            <div className ="flex justify-center">
+            <div className ="p-2 flex flex-wrap justify-center">
                 <div className = "p-5">
                 <input onClick = {(e) => {console.log("가까워ㅓ"); test(e)}} type="checkbox" id="가까워" className="peer hidden" />
                 <label htmlFor="가까워" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
@@ -268,7 +268,7 @@ const FilterButton = () => {
                 <div className = "p-5">
                 <input onClick = {(e) => {console.log("거리중간ㄴ");test(e)}} type="checkbox" id="거리중간" className="peer hidden" />
                 <label htmlFor="거리중간" className="button peer-checked:bg-blue-500 peer-checked:text-blue-900 peer-checked:border-blue-500 ">
-                    적당쓰
+                    적당해
                 </label>
                 </div>
                 <div className = "p-5">
