@@ -1,5 +1,5 @@
 {
-    "Sheet1": [
+    "Restaurants": [
       {
         "Name": "스푼",
         "Type": "분식",
@@ -25,7 +25,7 @@
         "Name": "청기와감자탕",
         "Type": "한식",
         "Price": "비싸",
-        "Distance": "중간",
+        "Distance": "거리중간",
         "Tates": "맛도리"
       },
       {
@@ -60,7 +60,7 @@
         "Name": "육본가",
         "Type": "한식",
         "Price": "중간",
-        "Distance": "중간",
+        "Distance": "거리중간",
         "Tates": "맛도리"
       },
       {
@@ -109,14 +109,14 @@
         "Name": "화양연화 현대프리미엄아울렛 송도점",
         "Type": "동남아식",
         "Price": "중간",
-        "Distance": "중간",
+        "Distance": "거리중간",
         "Tates": "평타"
       },
       {
         "Name": "드렁킨타이",
         "Type": "동남아식",
         "Price": "중간",
-        "Distance": "중간",
+        "Distance": "거리중간",
         "Tates": "평타"
       },
       {
@@ -157,8 +157,9 @@
       {
         "Name": "아비코",
         "Type": "일식",
-        "Price": "적당",
+        "Price": "중간",
         "Distance": "가까워",
         "Tates": "평타"
       }
     ]
+}
