@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { deleteAll, result, ShowData } from './FilterButton';
+import { createPortal } from 'react-dom';
+import ResultDetails from './ResultDetails';
 
 // result 가 필터링된 음식점들이 있는 어레이.
 
 let random = [];
 
-const pickRandomItems = (array, count) => {
-  count = count || 3;
+const pickRandomItems = (array) => {
+  let count = 1;
 
   if (array.length === 0) return [];
   if (array.length < count) return array;
@@ -30,15 +32,24 @@ const pickRandomItems = (array, count) => {
 };
 
 const makeRandom = () => {
-  random = pickRandomItems(result);
-}
+  // random = pickRandomItems(result);
+};
 
-const Result = () => {
+function Result() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   //example use case
-  console.log('random: ', random);
+  // console.log('random: ', random);
+  const random = [
+    {
+      Name: '아비코',
+      Type: '중식',
+      Price: '중간',
+      Distance: '가까워',
+      Tates: '평타',
+    },
+  ];
 
   return (
     <>
@@ -46,116 +57,82 @@ const Result = () => {
       <div className="text-center text-2xl">
         <button
           onClick={() => {
-            ShowData();
+            // ShowData();
             setIsOpen(true);
-            makeRandom();
+            // makeRandom();
           }}
           className="bg-blue-500 hover:bg-blue-700 p-7 text-white rounded-lg font-bold"
         >
-          추천 받기1
+          추천 받기
         </button>
         <p className="py-7"></p>
       </div>
-      {isOpen && (
-        <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:flex sm:items-center sm:justify-center">
-          <div className="fixed inset-0 transition-opacity">
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-          </div>
-          <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-80 sm:w-full sm:max-h-80 sm:h-full" style={{ maxHeight: "80vh", overflowY: "scroll" }}>
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                          <div className="mt-2"></div>
-                      </div>
+      {isOpen &&
+        createPortal(
+          showDetails ? (
+            <ResultDetails result={random} />
+          ) : (
+            <div className="relative w-screen h-screen">
+              <div
+                className="fixed inset-0 bg-[rgba(0,0,0,0.3)] w-full h-full flex justify-center items-center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpen(false);
+                }}
+              >
+                <div className="w-4/5 bg-white py-8 rounded-lg overflow-hidden">
+                  <div className="bg-indigo-500 p-10 mx-4 rounded-lg shadow-lg flex justify-center">
+                    <h1 className="text-2xl font-bold leading-loose text-white lg:text-5xl">오늘의 저녁 메뉴는!</h1>
                   </div>
-              </div>
-            <div className="bg-indigo-500 text-white p-10 rounded-lg shadow-lg container mx-auto flex justify-center">
-              <h1 className="text-5xl font-medium font-bold leading-loose">오늘의 저녁 메뉴는!</h1>
-            </div>
 
-            {/* 이 파트가 음식점들 보여주는거 */}
+                  {/* 이 파트가 음식점들 보여주는거 */}
 
-            <ul className="flex flex-col items-center justify-between text-lg font-bold text-cool-gray-500">
-              {random.map(random => (
-                <li key={random.Name} className="p-4">
-                  <div className="flex flex-col items-center">
-                    <div>
-                      {random.Name}
-                    </div>
-                    <img src={random.Image} className="w-32 h-32 ml-4" />
-                  </div>
-                  <button className="px-4 py-2 text-sm font-medium bg-cool-gray-500 text-white rounded-lg mt-4">
-                    상세 버튼
-                  </button>
-                </li>
-              ))}
-            </ul>
+                  <ul className="flex items-center justify-center text-lg font-bold text-cool-gray-500">
+                    {random.map((random) => (
+                      <li key={random.Name} className="p-4">
+                        <div className="flex flex-col justify-center items-center">
+                          <div>{random.Name}</div>
+                          <img src={random.Image} className="w-32 h-32 lg:w-48 lg:h-48" />
 
-            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    deleteAll();
-                    window.location.reload();
-                  }}
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                >
-                  닫기
-                </button>
-              </span>
-              <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                <button
-                  onClick={() => setIsOpen2(true)}
-                  type="button"
-                  className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                >
-                  상세 페이지 열기
-                </button>
-              </span>
+                          <button className="px-4 py-2 text-sm font-medium bg-gray-500 text-white rounded-lg mt-4">
+                            상세 버튼
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
 
-              {isOpen2 && (
-                <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:flex sm:items-center sm:justify-center">
-                  <div className="fixed inset-0 transition-opacity">
-                    <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                  </div>
-                  <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-80 sm:w-full sm:max-h-80 sm:h-full" style={{ maxHeight: "80vh", overflowY: "scroll" }}>
-                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                      <div className="sm:flex sm:items-start">
-                          <div className="bg-indigo-500 text-white p-10 rounded-lg shadow-lg container mx-auto">
-                            <h1 className="text-5xl font-medium font-bold leading-loose">뽑힌 메뉴들의 상세 페이지</h1>
-                          </div>
-                      </div>
-                      <p className="py-5"></p>
-                      <h2>이 리스트 중에서 뽑은 겁니다.</h2>
-                      <p className="py-5"></p>
-                      <ul>
-                        {result.map((dummy) => (
-                          <li key={dummy.Name}>{dummy.Name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                      <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button
-                          onClick={() => setIsOpen2(false)}
-                          type="button"
-                          className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                        >
-                          닫기
-                        </button>
-                      </span>
-                    </div>
+                  <div className="bg-gray-50 px-4 py-3 flex flex-col gap-4 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        deleteAll();
+                        window.location.reload();
+                      }}
+                      type="button"
+                      className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      닫기
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDetails(true);
+                      }}
+                      type="button"
+                      className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      상세 페이지 열기
+                    </button>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          ),
+          document.getElementById('modal-root'),
+        )}
     </>
   );
-};
+}
 
 export default Result;
