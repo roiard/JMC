@@ -3,6 +3,8 @@ import { deleteAll, result, ShowData } from './FilterButton';
 
 // result 가 필터링된 음식점들이 있는 어레이.
 
+let random = [];
+
 const pickRandomItems = (array, count) => {
   count = count || 3;
 
@@ -27,12 +29,15 @@ const pickRandomItems = (array, count) => {
   return res;
 };
 
+const makeRandom = () => {
+  random = pickRandomItems(result);
+}
+
 const Result = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
   //example use case
-  const random = pickRandomItems(result);
   console.log('random: ', random);
 
   return (
@@ -43,6 +48,7 @@ const Result = () => {
           onClick={() => {
             ShowData();
             setIsOpen(true);
+            makeRandom();
           }}
           className="bg-blue-500 hover:bg-blue-700 p-7 text-white rounded-lg font-bold"
         >
