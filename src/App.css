@@ -42,19 +42,19 @@
 
 .button {
   padding-top: 0.75rem;
-  padding-bottom: 0.75rem; 
+  padding-bottom: 0.75rem;
   padding-left: 1.5rem;
-  padding-right: 1.5rem; 
-  transition-property: background-color, border-color, color, fill, stroke; 
-  transition-duration: 200ms; 
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+  padding-right: 1.5rem;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 700;
   color: rgb(20, 63, 206);
-  border-radius: 0.5rem; 
-  border-width: 2px; 
+  border-radius: 0.5rem;
+  border-width: 2px;
   border-color: rgb(81, 78, 226);
-  cursor: pointer; 
-  user-select: none; 
+  cursor: pointer;
+  user-select: none;
 }
 
 @keyframes App-logo-spin {

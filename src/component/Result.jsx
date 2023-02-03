@@ -4,7 +4,6 @@ import { createPortal } from 'react-dom';
 import ResultDetails from './ResultDetails';
 
 // result 가 필터링된 음식점들이 있는 어레이.
-
 let random = [];
 
 const pickRandomItems = (array) => {
@@ -32,7 +31,7 @@ const pickRandomItems = (array) => {
 };
 
 const makeRandom = () => {
-  // random = pickRandomItems(result);
+  random = pickRandomItems(result);
 };
 
 function Result() {
@@ -40,16 +39,7 @@ function Result() {
   const [showDetails, setShowDetails] = useState(false);
 
   //example use case
-  // console.log('random: ', random);
-  const random = [
-    {
-      Name: '아비코',
-      Type: '중식',
-      Price: '중간',
-      Distance: '가까워',
-      Tates: '평타',
-    },
-  ];
+  console.log('random: ', random);
 
   return (
     <>
@@ -57,9 +47,9 @@ function Result() {
       <div className="text-center text-2xl">
         <button
           onClick={() => {
-            // ShowData();
+            ShowData();
             setIsOpen(true);
-            // makeRandom();
+            makeRandom();
           }}
           className="bg-blue-500 hover:bg-blue-700 p-7 text-white rounded-lg font-bold"
         >
@@ -69,17 +59,17 @@ function Result() {
       </div>
       {isOpen &&
         createPortal(
-          showDetails ? (
-            <ResultDetails result={random} />
-          ) : (
-            <div className="relative w-screen h-screen">
-              <div
-                className="fixed inset-0 bg-[rgba(0,0,0,0.3)] w-full h-full flex justify-center items-center"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpen(false);
-                }}
-              >
+          <div className="relative w-screen h-screen">
+            <div
+              className="fixed inset-0 bg-[rgba(0,0,0,0.3)] w-full h-full flex justify-center items-center"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(false);
+              }}
+            >
+              {showDetails ? (
+                <ResultDetails result={random} onRequestClose={() => setShowDetails(false)} />
+              ) : (
                 <div className="w-4/5 bg-white py-8 rounded-lg overflow-hidden">
                   <div className="bg-indigo-500 p-10 mx-4 rounded-lg shadow-lg flex justify-center">
                     <h1 className="text-2xl font-bold leading-loose text-white lg:text-5xl">오늘의 저녁 메뉴는!</h1>
@@ -126,9 +116,9 @@ function Result() {
                     </button>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
-          ),
+          </div>,
           document.getElementById('modal-root'),
         )}
     </>
