@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'min-w-660': {'min': '660px'},
+        'min-w-676': {'min': '676px'},
       },
     },
   },
