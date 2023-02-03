@@ -1,41 +1,43 @@
 import React from 'react';
-import {random} from './Result';
 
 let name;
 let distance = "준비중";
 let price = "준비중";
 let main = "미정";
 
-const ResChar = (random) => {
-  let restaurant = random[0];
+const ResChar = (arr) => {
+    name = Object.values(arr)[0][0].Name;
+    price = Object.values(arr)[0][0].Price;
+    distance = Object.values(arr)[0][0].Distance;
 
-  name = restaurant.Name;
-  price = restaurant.Price;
-  console.log(name, distance, price);
+    console.log(name, price, distance);
 
-  if(restaurant.distance === "가까워"){
-      distance = "가깝습니다 (약 도보 10분 이내)";
-  }
-  else if(restaurant.distance === "거리중간"){
-    distance = "적당합니다 (약 도보 15분 이상)";
-  }
-  else{
-    distance = "멀어요 (약 도보 20분 이상)";
-  }
-
-  if(restaurant.Price === "싸"){
-    price = "가성비! (약 만원이내)";
-  }
-  else if(restaurant.Price === "중간"){
-    price = "적당힙니다 (약 만원대)";
-  }
-  else{
-    price = "가격대가 있습니다 (만원대 or 그 이상)";
-  }
+    if(distance === "가까워"){
+        distance = "가깝습니다 (약 도보 10분 이내)";
+    }
+    else if(distance === "거리중간"){
+      distance = "적당합니다 (약 도보 15분 이상)";
+    }
+    else{
+      distance = "멀어요 (약 도보 20분 이상)";
+    }
+  
+    if(price === "싸"){
+      price = "가성비! (약 만원이내)";
+    }
+    else if(price === "중간"){
+      price = "적당힙니다 (약 만원대)";
+    }
+    else{
+      price = "가격대가 있습니다 (만원대 or 그 이상)";
+    }
 }
 
-const Detail = () => {
-    ResChar(random);
+const Detail = (result) => {
+
+    console.log('result: ',result);
+    ResChar(result);
+
     return(
     <>
         <div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:flex sm:items-center sm:justify-center">
