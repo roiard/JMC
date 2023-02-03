@@ -6,9 +6,9 @@ let price = '준비중';
 let main = '미정';
 
 const ResChar = (arr) => {
-  name = Object.values(arr)[0][0].Name;
-  price = Object.values(arr)[0][0].Price;
-  distance = Object.values(arr)[0][0].Distance;
+  name = Object.values(arr)[0].Name;
+  price = Object.values(arr)[0].Price;
+  distance = Object.values(arr)[0].Distance;
 
   console.log(name, price, distance);
 
@@ -31,6 +31,7 @@ const ResChar = (arr) => {
 
 function ResultDetail({ result, onRequestClose }) {
   //   console.log('result: ', result);
+
   ResChar(result);
 
   return (
