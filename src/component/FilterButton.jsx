@@ -212,7 +212,7 @@ function FilterButton() {
       checked: false,
     },
     {
-      name: '적당해',
+      name: '중간',
       checked: false,
     },
     {
@@ -226,7 +226,7 @@ function FilterButton() {
       checked: false,
     },
     {
-      name: '적당',
+      name: '거리중간',
       checked: false,
     },
     {
