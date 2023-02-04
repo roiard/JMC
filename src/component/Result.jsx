@@ -14,7 +14,7 @@ function Result({ result, setIsOpen, handleClose }) {
     <>
       {createPortal(
         showDetails ? (
-          <ResultDetails result={random} />
+          <ResultDetails result={result} setShowDetails = {setShowDetails}/>
         ) : (
           <div className="relative w-screen h-screen">
             <div
@@ -37,10 +37,6 @@ function Result({ result, setIsOpen, handleClose }) {
                       <div className="flex flex-col justify-center items-center">
                         <div>{random.Name}</div>
                         <img src={random.Image} className="w-32 h-32 lg:w-48 lg:h-48" />
-
-                        <button className="px-4 py-2 text-sm font-medium bg-gray-500 text-white rounded-lg mt-4">
-                          상세 버튼
-                        </button>
                       </div>
                     </li>
                   ))}
