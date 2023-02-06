@@ -54,7 +54,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'react/no-array-index-key': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'react/function-component-definition': 2,
+    'react/function-component-definition': [1],
     /* typescript-eslint options */
     '@typescript-eslint/no-empty-interface': 'warn',
     '@typescript-eslint/adjacent-overload-signatures': 'warn',

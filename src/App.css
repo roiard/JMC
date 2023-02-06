@@ -1,3 +1,15 @@
+.container {
+  width: 100%;
+  max-width: 676px;
+  margin: 0 auto;
+}
+
+@media (min-width: 676px) {
+  .container {
+    width: auto;
+  }
+}
+
 .App {
   text-align: center;
 }
