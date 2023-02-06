@@ -7,7 +7,7 @@ function Nav() {
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <a href="#" className="text-white font-bold text-xl">
-            저메추 V.0.0
+            저메추 V.1.0
           </a>
         </div>
         {/* <div className="flex items-center">
