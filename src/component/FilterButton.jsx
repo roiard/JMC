@@ -41,7 +41,7 @@ const popKeyword = (word) => {
 };
 
 const pushEach = (word) => {
-  if (['한식', '중식', '일식', '양식', '분식'].includes(word)) {
+  if (['한식', '중식', '일식', '양식', '동남아식'].includes(word)) {
     chosenType.push(word);
   } else if (['싸', '중간', '비싸'].includes(word)) {
     chosenPrice.push(word);
@@ -51,7 +51,7 @@ const pushEach = (word) => {
 };
 
 const popEach = (word) => {
-  if (['한식', '중식', '일식', '양식', '분식'].includes(word)) {
+  if (['한식', '중식', '일식', '양식', '동남아식'].includes(word)) {
     chosenType = chosenType.filter((dummy) => dummy !== word);
   } else if (['싸', '중간', '비싸'].includes(word)) {
     chosenPrice = chosenPrice.filter((dummy) => dummy !== word);
@@ -202,7 +202,7 @@ function FilterButton() {
       checked: false,
     },
     {
-      name: '분식',
+      name: '동남아식',
       checked: false,
     },
   ];
